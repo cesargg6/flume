@@ -1,5 +1,5 @@
 -- Cargar datos desde el archivo tweets.csv
-tweets = LOAD 'tweets.csv' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
+tweets = LOAD 'ejemplo.csv' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
 
 -- Filtrar tweets por fecha
 tweets_filtrados = FILTER tweets BY fecha >= '2023-01-01';
