@@ -12,5 +12,5 @@ tweets_ordenados = ORDER tweets_por_usuario BY num_tweets DESC;
 
 -- Mostrar los resultados
 -- DUMP tweets_ordenados;
-STORE tweets_ordenados INTO '/content/prueba.txt' USING PigStorage(',');
+STORE tweets_ordenados INTO '/content/resultadoPig' USING PigStorage(',');
 
