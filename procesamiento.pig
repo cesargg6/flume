@@ -1,5 +1,5 @@
 -- Cargar datos desde el archivo tweets.csv
-tweets = LOAD '/content/flume/resultado/event-*' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
+tweets = LOAD '/content/flume/resultado/events-*' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
 
 -- Filtrar tweets por fecha
 tweets_filtrados = FILTER tweets BY fecha >= '2023-01-01';
