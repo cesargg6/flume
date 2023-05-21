@@ -33,4 +33,4 @@ sorted_data = ORDER tweet_count BY num_negative_tweets DESC;
 
 -- Mostrar los resultados
 -- DUMP tweets_ordenados;
-STORE sorted_data, tweet_count, grouped_data, negative_tweets INTO '/content/resultadoPig' USING PigStorage(',');
+STORE data INTO '/content/resultadoPig' USING PigStorage(',');
