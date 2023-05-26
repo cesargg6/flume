@@ -4,7 +4,7 @@ files = LOAD '/content/flume/resultado/events-*.tmp' USING PigStorage(',') AS (f
 -- Procesar secuencialmente cada archivo
 processed_data = FOREACH files {
     -- Cargar el archivo actual
-    data = LOAD events* USING PigStorage(',') AS (
+    data = LOAD resultado USING PigStorage(',') AS (
         tweet_id: long,
         airline_sentiment: chararray,
         airline_sentiment_confidence: float,
