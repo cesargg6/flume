@@ -35,7 +35,7 @@ processed_data = FOREACH files {
     sorted_data = ORDER tweet_count BY num_negative_tweets DESC;
 
     -- Prueba de variables
-    prueba = $hadoop_home;
+    prueba = $HADOOP_HOME;
     
     -- Retorna los resultados
     GENERATE sorted_data;
