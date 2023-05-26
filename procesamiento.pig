@@ -1,6 +1,6 @@
 -- Cargar datos desde el archivo tweets.csv
 -- /content/flume/resultado/events-*
--- tweets = LOAD '/content/flume/resultado/events-*' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
+-- tweets = LOAD '/content/flume/resultado/events-*.log' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
 data = LOAD 'Tweets.csv' USING PigStorage(',') AS (
     tweet_id: long,
     airline_sentiment: chararray,
