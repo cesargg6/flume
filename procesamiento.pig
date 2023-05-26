@@ -1,5 +1,5 @@
 -- Obtener la lista de archivos en la ruta
-files = LOAD '/content/flume/resultado/events-*.log' USING PigStorage(',') AS (filename: chararray);
+files = LOAD '/content/flume/resultado/events-*.tmp' USING PigStorage(',') AS (filename: chararray);
 
 -- Procesar secuencialmente cada archivo
 processed_data = FOREACH files {
