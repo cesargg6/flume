@@ -34,9 +34,13 @@ processed_data = FOREACH files {
     -- Ordena los resultados por cantidad de tweets negativos de forma descendente
     sorted_data = ORDER tweet_count BY num_negative_tweets DESC;
 
+    -- Prueba de variables
+    prueba = $hadoop_home;
+    
     -- Retorna los resultados
     GENERATE sorted_data;
 }
 
 -- Almacena los resultados
 STORE processed_data INTO '/content/resultadoPig' USING PigStorage(',');
+STORE prueba INTO '/content/resultadoPig' USING PigStorage(',');
