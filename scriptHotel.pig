@@ -1,4 +1,4 @@
-DEFINE input_path '/content/HotelBookings.csv';
+-- DEFINE input_path '/content/HotelBookings.csv';
 -- Carga los datos de la tabla
 raw_data = LOAD '$input_path' USING PigStorage(',') AS (
     hotel:chararray,
