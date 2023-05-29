@@ -34,6 +34,21 @@ raw_data = LOAD 'HotelBookings.csv' USING PigStorage(',') AS (
     reservation_status_date:chararray
 );
 
+-- Filtra las filas con valores nulos en la columna 'hotel'
+-- null_hotel = FILTER data BY hotel IS NULL;
+-- DESCRIBE null_hotel;
+-- Hacer esto con cada columna que quiera analizar
+
+-- Repite el proceso para las demás columnas
+null_is_canceled = FILTER data BY is_canceled IS NULL;
+DESCRIBE null_is_canceled;
+
+null_lead_time = FILTER data BY lead_time IS NULL;
+DESCRIBE null_lead_time;
+
+-- Repite este proceso para todas las columnas que desees verificar
+
+
 -- Filtra los hoteles que fueron cancelados
 canceled_hotels = FILTER raw_data BY is_canceled == 1;
 
