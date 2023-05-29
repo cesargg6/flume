@@ -1,6 +1,6 @@
 -- Cargar datos desde el archivo tweets.csv
 -- /content/flume/resultado/events-*
--- tweets = LOAD '/content/flume/resultado/events-*.log' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
+-- tweets = LOAD '/content/HotelBookings.csv' USING PigStorage(',') AS (id:int, usuario:chararray, texto:chararray, fecha:chararray);
 data = LOAD 'Tweets.csv' USING PigStorage(',') AS (
     tweet_id: long,
     airline_sentiment: chararray,
@@ -31,6 +31,24 @@ tweet_count = FOREACH grouped_data GENERATE group AS airline, COUNT(negative_twe
 -- Ordena los resultados por cantidad de tweets negativos de forma descendente
 sorted_data = ORDER tweet_count BY num_negative_tweets DESC;
 
+-- Filtra los registros eliminando los valores NULL
+filtered_data = FILTER data BY
+    tweet_id IS NOT NULL AND
+    airline_sentiment IS NOT NULL AND
+    airline_sentiment_confidence IS NOT NULL AND
+    negativereason IS NOT NULL AND
+    negativereason_confidence IS NOT NULL AND
+    airline IS NOT NULL AND
+    airline_sentiment_gold IS NOT NULL AND
+    name IS NOT NULL AND
+    negativereason_gold IS NOT NULL AND
+    retweet_count IS NOT NULL AND
+    text IS NOT NULL AND
+    tweet_coord IS NOT NULL AND
+    tweet_created IS NOT NULL AND
+    tweet_location IS NOT NULL AND
+    user_timezone IS NOT NULL;
+
 -- Mostrar los resultados
 -- DUMP tweets_ordenados;
-STORE data INTO '/content/resultadoPig' USING PigStorage(',');
+STORE filtered_data INTO '/content/resultadoPig' USING PigStorage(',');
