@@ -51,4 +51,3 @@ reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arri
 STORE avg_waiting_time INTO '/content/resultadoPig/Tiempo_espera_promedio';
 STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais';
 STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo';
-STORE raw_data INTO '/content/resultadoPig/Tabla';
