@@ -31,7 +31,7 @@ raw_data = LOAD 'HotelBookings.csv' USING PigStorage(',') AS (
     required_car_parking_spaces:int,
     total_of_special_requests:int,
     reservation_status:chararray,
-    reservation_status_date:chararray
+    reservation_status_date_new:chararray
 );
 
 -- Filtra y elimina las columnas con valores nulos
