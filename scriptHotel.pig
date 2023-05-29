@@ -1,5 +1,5 @@
 -- Carga los datos de la tabla
-raw_data = LOAD '/content/flume/resultado/events-.1685378467483' USING PigStorage(',') AS (
+raw_data = LOAD '/content/flume/resultado/events-.1685378706488' USING PigStorage(',') AS (
     hotel:chararray,
     is_canceled:int,
     lead_time:int,
