@@ -40,8 +40,8 @@ raw_data = LOAD 'HotelBookings.csv' USING PigStorage(',') AS (
 -- Hacer esto con cada columna que quiera analizar
 
 -- Repite el proceso para las demás columnas
-null_is_canceled = FILTER data BY is_canceled IS NULL;
-DESCRIBE null_is_canceled;
+-- null_is_canceled = FILTER data BY is_canceled IS NULL;
+-- DESCRIBE null_is_canceled;
 
 null_lead_time = FILTER data BY lead_time IS NULL;
 DESCRIBE null_lead_time;
