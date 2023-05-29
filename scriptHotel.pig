@@ -38,7 +38,7 @@ raw_data = LOAD 'HotelBookings.csv' USING PigStorage(',') AS (
 canceled_hotels = FILTER raw_data BY is_canceled == 1;
 
 -- Calcula el tiempo promedio de espera en días para las reservas canceladas
-avg_waiting_time = FOREACH canceled_hotels GENERATE AVG(days_in_waiting_list) AS avg_wait_time;
+avg_waiting_time = FOREACH canceled_hotels GENERATE AVG((float)days_in_waiting_list) AS avg_wait_time;
 
 -- Calcula la cantidad total de reservas por país
 reservations_by_country = FOREACH (GROUP raw_data BY country) GENERATE group AS country, COUNT(raw_data) AS total_reservations;
