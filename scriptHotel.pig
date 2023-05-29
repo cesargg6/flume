@@ -40,7 +40,8 @@ filtered_data = FOREACH raw_data GENERATE
     stays_in_weekend_nights, stays_in_week_nights, adults, children, babies, meal, country, market_segment, distribution_channel,
     is_repeated_guest, previous_cancellations, previous_bookings_not_canceled, reserved_room_type, assigned_room_type,
     booking_changes, deposit_type, agent, company, days_in_waiting_list, customer_type, adr, required_car_parking_spaces,
-    total_of_special_requests, reservation_status, reservation_status_date, WHERE hotel is not null and is_canceled is not null and lead_time is not null and arrival_date_year is not null
+    total_of_special_requests, reservation_status, reservation_status_date
+    WHERE hotel is not null and is_canceled is not null and lead_time is not null and arrival_date_year is not null
     and arrival_date_month is not null and arrival_date_week_number is not null and arrival_date_day_of_month is not null
     and stays_in_weekend_nights is not null and stays_in_week_nights is not null and adults is not null and children is not null
     and babies is not null and meal is not null and country is not null and market_segment is not null
