@@ -64,9 +64,9 @@ SET output_path_year : '/content/resultadoPig/Reservas_mes_anyo';
 SET output_path_table : '/content/resultadoPig/Tabla';
 
 -- Comprobar si la ruta ya existe utilizando comandos del sistema de archivos
-fs -test -e $output_path_country;
-fs -test -e $output_path_year;
-fs -test -e $output_path_table;
+-- fs -test -e $output_path_country;
+-- fs -test -e $output_path_year;
+-- fs -test -e $output_path_table;
 
 -- Si la ruta existe, guardar los resultados allí
 -- Si no, crear la ruta y guardar los resultados
