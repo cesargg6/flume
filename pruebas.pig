@@ -48,7 +48,6 @@ raw_data = LOAD '$input_path' USING PigStorage(',') AS (
 
 -- Repite este proceso para todas las columnas que desees verificar
 
-
 -- Filtra los hoteles que fueron cancelados
 canceled_hotels = FILTER raw_data BY is_canceled == 1;
 
@@ -59,7 +58,24 @@ reservations_by_country = FOREACH (GROUP raw_data BY country) GENERATE group AS 
 reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arrival_date_month)) GENERATE 
     FLATTEN(group) AS (year:int, month:chararray), COUNT(raw_data) AS total_reservations;
 
+-- Definir la ruta de salida deseada
+DEFINE output_path_country '/content/resultadoPig/Reservas_por_pais';
+DEFINE output_path_year '/content/resultadoPig/Reservas_mes_anyo';
+DEFINE output_path_table '/content/resultadoPig/Tabla';
+
+-- Comprobar si la ruta ya existe utilizando comandos del sistema de archivos
+fs -test -e $output_path_country;
+fs -test -e $output_path_year;
+fs -test -e $output_path_table;
+
+-- Si la ruta existe, guardar los resultados allí
+-- Si no, crear la ruta y guardar los resultados
+STORE reservations_by_country INTO $output_path_country USING PigStorage(',');
+STORE reservations_by_month_year INTO $output_path_year USING PigStorage(',');
+STORE raw_data INTO $output_path_table USING PigStorage(',');
+
+
 -- Guarda los resultados en archivos
-STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais';
-STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo';
-STORE raw_data INTO '/content/resultadoPig/Tabla';
+-- STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais';
+-- STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo';
+-- STORE raw_data INTO '/content/resultadoPig/Tabla';
