@@ -59,11 +59,10 @@ reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arri
     FLATTEN(group) AS (year:int, month:chararray), COUNT(raw_data) AS total_reservations;
 
 
--- %default
 -- Definir la ruta de salida deseada
-SET output_path_country '/content/resultadoPig/Reservas_por_pais';
-SET output_path_year '/content/resultadoPig/Reservas_mes_anyo';
-SET output_path_table '/content/resultadoPig/Tabla';
+%default output_path_country '/content/resultadoPig/Reservas_por_pais';
+%default output_path_year '/content/resultadoPig/Reservas_mes_anyo';
+%default output_path_table '/content/resultadoPig/Tabla';
 
 -- Comprobar si la ruta ya existe utilizando comandos del sistema de archivos
 -- fs -test -e $output_path_country;
