@@ -58,10 +58,12 @@ reservations_by_country = FOREACH (GROUP raw_data BY country) GENERATE group AS 
 reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arrival_date_month)) GENERATE 
     FLATTEN(group) AS (year:int, month:chararray), COUNT(raw_data) AS total_reservations;
 
+
+-- %default
 -- Definir la ruta de salida deseada
-%default output_path_country '/content/resultadoPig/Reservas_por_pais';
-%default output_path_year '/content/resultadoPig/Reservas_mes_anyo';
-%default output_path_table '/content/resultadoPig/Tabla';
+SET output_path_country '/content/resultadoPig/Reservas_por_pais';
+SET output_path_year '/content/resultadoPig/Reservas_mes_anyo';
+SET output_path_table '/content/resultadoPig/Tabla';
 
 -- Comprobar si la ruta ya existe utilizando comandos del sistema de archivos
 -- fs -test -e $output_path_country;
@@ -73,10 +75,3 @@ reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arri
 STORE reservations_by_country INTO $output_path_country USING PigStorage(',');
 STORE reservations_by_month_year INTO $output_path_year USING PigStorage(',');
 STORE raw_data INTO $output_path_table USING PigStorage(',');
-
-
-
--- Guarda los resultados en archivos
--- STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais';
--- STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo';
--- STORE raw_data INTO '/content/resultadoPig/Tabla';
