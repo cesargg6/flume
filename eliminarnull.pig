@@ -34,19 +34,8 @@ raw_data = LOAD '$input_path' USING PigStorage(',') AS (
     reservation_status_date:chararray
 );
 
--- Filtra las filas con valores nulos en la columna 'hotel'
--- null_hotel = FILTER data BY hotel IS NULL;
--- DESCRIBE null_hotel;
--- Hacer esto con cada columna que quiera analizar
-
--- Repite el proceso para las demás columnas
--- null_is_canceled = FILTER data BY is_canceled IS NULL;
--- DESCRIBE null_is_canceled;
-
--- null_lead_time = FILTER data BY lead_time IS NULL;
--- DESCRIBE null_lead_time;
-
--- Repite este proceso para todas las columnas que desees verificar
+-- Eliminar los valores null
+null_company = FILTER raw_data BY company IS NULL;
 
 -- Filtra los hoteles que fueron cancelados
 canceled_hotels = FILTER raw_data BY is_canceled == 1;
@@ -61,3 +50,5 @@ reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arri
 STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais' USING PigStorage(',');
 STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo' USING PigStorage(',');
 STORE raw_data INTO '/content/resultadoPig/Tabla' USING PigStorage(',');
+-- Mostrar los valores nulos de la columna 'hotel'
+DUMP null_company;
