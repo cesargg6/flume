@@ -47,8 +47,8 @@ reservations_by_country = FOREACH (GROUP raw_data BY country) GENERATE group AS 
 reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arrival_date_month)) GENERATE 
     FLATTEN(group) AS (year:int, month:chararray), COUNT(raw_data) AS total_reservations;
 
-STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais' USING PigStorage(',');
-STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo' USING PigStorage(',');
-STORE raw_data INTO '/content/resultadoPig/Tabla' USING PigStorage(',');
+-- STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais' USING PigStorage(',');
+-- STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo' USING PigStorage(',');
+-- STORE raw_data INTO '/content/resultadoPig/Tabla' USING PigStorage(',');
 -- Mostrar los valores nulos de la columna 'hotel'
 DUMP null_company;
