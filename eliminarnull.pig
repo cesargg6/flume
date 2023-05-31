@@ -35,7 +35,8 @@ raw_data = LOAD '$input_path' USING PigStorage(',') AS (
 );
 
 -- Eliminar los valores null
-null_company = FILTER raw_data BY company IS NULL;
+-- null_company = FILTER raw_data BY company IS NULL;
+null_company = FOREACH null_hotel GENERATE company;
 
 -- Filtra los hoteles que fueron cancelados
 canceled_hotels = FILTER raw_data BY is_canceled == 1;
