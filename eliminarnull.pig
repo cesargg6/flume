@@ -35,8 +35,9 @@ raw_data = LOAD '$input_path' USING PigStorage(',') AS (
 );
 
 -- Eliminar los valores null
--- null_company = FILTER raw_data BY company IS NULL;
-null_company = FOREACH null_hotel GENERATE company;
+null_company = FILTER raw_data BY company IS NULL;
+null_company_seleccionado = FOREACH null_company GENERATE company;
+
 
 -- Filtra los hoteles que fueron cancelados
 canceled_hotels = FILTER raw_data BY is_canceled == 1;
@@ -52,4 +53,4 @@ reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arri
 -- STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo' USING PigStorage(',');
 -- STORE raw_data INTO '/content/resultadoPig/Tabla' USING PigStorage(',');
 -- Mostrar los valores nulos de la columna 'hotel'
-DUMP null_company;
+DUMP null_company_seleccionado;
