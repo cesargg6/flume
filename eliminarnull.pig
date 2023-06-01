@@ -38,6 +38,8 @@ raw_data = LOAD '$input_path' USING PigStorage(',') AS (
 null_company = FILTER raw_data BY company IS NULL;
 null_company_seleccionado = FOREACH null_company GENERATE company;
 
+-- Almacenar los resultados en un archivo CSV
+STORE null_company_seleccionado INTO '$output_path' USING PigStorage(',');
 
 -- Filtra los hoteles que fueron cancelados
 canceled_hotels = FILTER raw_data BY is_canceled == 1;
