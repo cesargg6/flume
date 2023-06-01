@@ -61,6 +61,6 @@ reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arri
 
 -- Si la ruta existe, guardar los resultados allí
 -- Si no, crear la ruta y guardar los resultados
-STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais' USING PigStorage(',');
-STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo' USING PigStorage(',');
-STORE raw_data INTO '/content/resultadoPig/Tabla' USING PigStorage(',');
+STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais' USING PigStorage(',') OVERWRITE;
+STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo' USING PigStorage(',') OVERWRITE;
+STORE raw_data INTO '/content/resultadoPig/Tabla' USING PigStorage(',') OVERWRITE;
