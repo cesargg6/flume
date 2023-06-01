@@ -41,18 +41,7 @@ null_company_seleccionado = FOREACH null_company GENERATE company;
 -- Almacenar los resultados en un archivo CSV
 STORE null_company_seleccionado INTO '$output_path/prueba.csv' USING PigStorage(',');
 
--- Filtra los hoteles que fueron cancelados
-canceled_hotels = FILTER raw_data BY is_canceled == 1;
+-- Copiar el archivo a una ubicación final con extensión .csv
+fs -copyToLocal 'null_company_temp' '$output_path/null_company.csv';
 
--- Calcula la cantidad total de reservas por país
-reservations_by_country = FOREACH (GROUP raw_data BY country) GENERATE group AS country, COUNT(raw_data) AS total_reservations;
-
--- Obtiene la cantidad de reservas por mes y año
-reservations_by_month_year = FOREACH (GROUP raw_data BY (arrival_date_year, arrival_date_month)) GENERATE 
-    FLATTEN(group) AS (year:int, month:chararray), COUNT(raw_data) AS total_reservations;
-
--- STORE reservations_by_country INTO '/content/resultadoPig/Reservas_por_pais' USING PigStorage(',');
--- STORE reservations_by_month_year INTO '/content/resultadoPig/Reservas_mes_anyo' USING PigStorage(',');
--- STORE raw_data INTO '/content/resultadoPig/Tabla' USING PigStorage(',');
--- Mostrar los valores nulos de la columna 'hotel'
 DUMP null_company_seleccionado;
