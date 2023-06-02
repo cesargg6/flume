@@ -83,3 +83,4 @@ STORE filtered_data INTO '/content/resultadoPig/' USING PigStorage(',');
 -- fs -copyToLocal 'null_company_temp' '$output_path/null_company.csv';
 
 -- DUMP null_company_seleccionado;
+DUMP raw_data;
