@@ -77,7 +77,7 @@ filtered_data = FILTER raw_data BY (
 );
 
 -- Almacenar los resultados en un archivo CSV
-STORE filtered_data INTO '/content/HDFS/resultadoPig/' USING PigStorage(',');
+STORE filtered_data INTO '$output_path' USING PigStorage(',');
 
 -- Copiar el archivo a una ubicación final con extensión .csv
 -- fs -copyToLocal 'null_company_temp' '$output_path/null_company.csv';
